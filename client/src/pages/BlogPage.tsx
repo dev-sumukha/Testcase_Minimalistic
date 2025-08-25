@@ -98,62 +98,62 @@ export default function BlogPage() {
 
   return (
     <>
-            <Navbar />
-    <div className="container mx-auto max-w-3xl px-4 py-12">
-      {blog.image && (
-        <img
-          src={blog.image}
-          alt={blog.title}
-          className="w-full h-80 object-cover rounded-lg mb-6 shadow-lg"
-        />
-      )}
+      <Navbar />
+      <div className="container mx-auto max-w-3xl px-4 py-12">
+        {blog.image && (
+          <img
+            src={blog.image}
+            alt={blog.title}
+            className="w-full h-80 object-cover rounded-lg mb-6 shadow-lg"
+          />
+        )}
 
-      <Badge className={`${getCategoryColor(blog.category)} text-xs font-medium px-3 py-1 mb-3`}>
-        {blog.category}
-      </Badge>
+        <Badge className={`${getCategoryColor(blog.category)} text-xs font-medium px-3 py-1 mb-3`}>
+          {blog.category}
+        </Badge>
 
-      <h1 className="text-4xl font-bold text-gray-900 mb-4">{blog.title}</h1>
-      <div className="text-sm text-gray-500 mb-8">
-        {blog.date} • {blog.readTime}
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">{blog.title}</h1>
+        <div className="text-sm text-gray-500 mb-8">
+          {blog.date} • {blog.readTime}
+        </div>
+
+        <div className="prose prose-lg text-gray-700">
+          {blog.content.map((block, idx) => {
+            if (block.type === "paragraph") {
+              return <p key={`para-${idx}`}>{block.text}</p>
+            }
+            if (block.type === "heading") {
+              return <h2 key={`heading-${idx}`}>{block.text}</h2>
+            }
+            if (block.type === "list" && "items" in block && Array.isArray(block.items)) {
+              return (
+                <ul key={`list-${idx}`} className="list-disc list-inside mb-4">
+                  {block.items.map((item, i) => (
+                    <li key={`list-item-${idx}-${i}`}>{item}</li>
+                  ))}
+                </ul>
+              )
+            }
+            if (block.type === "code") {
+              return (
+                <pre
+                  key={`code-${idx}`}
+                  className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm text-gray-800 mb-4"
+                >
+                  <code>{block.text}</code>
+                </pre>
+              )
+            }
+            return null
+          })}
+        </div>
+
+
+        <Button className="mt-8 w-full bg-black text-white hover:bg-gray-800 rounded">
+          Back to Blogs
+        </Button>
       </div>
-
-      <div className="prose prose-lg text-gray-700">
-        {blog.content.map((block, idx) => {
-          if (block.type === "paragraph") {
-            return <p key={idx}>{block.text}</p>
-          }
-          if (block.type === "heading") {
-            return <h2 key={idx}>{block.text}</h2>
-          }
-          if (block.type === "list") {
-            return (
-              // <ul key={idx} className="list-disc list-inside">
-              //   {block.items.map((item, i) => (
-              //     <li key={i}>{item}</li>
-              //   ))}
-              // </ul>
-              <></>
-            )
-          }
-          if (block.type === "code") {
-            return (
-              <pre
-                key={idx}
-                className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm text-gray-800 mb-4"
-              >
-                <code>{block.text}</code>
-              </pre>
-            )
-          }
-          return null
-        })}
-      </div>
-
-      <Button className="mt-8 w-full bg-black text-white hover:bg-gray-800 rounded">
-        Back to Blogs
-      </Button>
-    </div>
-    <Footer />
+      <Footer />
     </>
   )
 }

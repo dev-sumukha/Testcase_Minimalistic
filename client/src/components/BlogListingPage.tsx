@@ -151,9 +151,10 @@ export default function BlogListingPage() {
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                     {blog.excerpt}
                   </p>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded">
-                    Read More
+                  <Button asChild className="w-full bg-black text-white hover:bg-gray-800 rounded">
+                    <Link to="/blogs/1">Read More</Link>
                   </Button>
+                  {/* Here, the Link will inherit the button’s styles and navigation will work. */}
                 </CardContent>
               </Card>
             ))

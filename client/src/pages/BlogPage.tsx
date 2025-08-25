@@ -127,11 +127,12 @@ export default function BlogPage() {
           }
           if (block.type === "list") {
             return (
-              <ul key={idx} className="list-disc list-inside">
-                {block.items.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
+              // <ul key={idx} className="list-disc list-inside">
+              //   {block.items.map((item, i) => (
+              //     <li key={i}>{item}</li>
+              //   ))}
+              // </ul>
+              <></>
             )
           }
           if (block.type === "code") {
